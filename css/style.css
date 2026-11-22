@@ -368,3 +368,139 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--a
   .main-title { font-size: 2.1rem; }
   .stats { gap: 1.25rem; }
 }
+
+/* ========== Share modal + Feedback ========== */
+.modal {
+  position: fixed; inset: 0; z-index: 1000;
+  display: none; align-items: center; justify-content: center;
+  background: var(--overlay, rgba(4, 6, 10, 0.88));
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+}
+.modal.active { display: flex; animation: screenIn 0.3s ease; }
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  padding: 1.5rem;
+  max-width: 440px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow);
+}
+
+.close-modal {
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--bg-main);
+  color: var(--text-main); font-size: 1.25rem; cursor: pointer;
+  display: grid; place-items: center; line-height: 1;
+}
+.close-modal:hover { border-color: var(--accent); }
+
+.share-card .eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.14em; color: var(--accent-text);
+  margin-bottom: 0.35rem;
+}
+.share-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;
+}
+
+.share-row {
+  display: flex; gap: 0.5rem; margin-bottom: 1rem;
+}
+.share-row input {
+  flex: 1; margin: 0; font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.view-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg-main); color: var(--text-main);
+  border: 1px solid var(--border-strong); border-radius: 10px;
+  padding: 0.55rem 0.9rem; font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+}
+.view-btn:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+.view-btn.solid {
+  background: var(--accent); color: #fff; border-color: transparent;
+}
+.view-btn.solid:hover { filter: brightness(1.08); }
+
+.share-targets {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;
+}
+
+.share-divider {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin: 0.5rem 0 1.1rem; color: var(--text-secondary); font-size: 0.8rem;
+}
+.share-divider::before, .share-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+.feedback-form { display: flex; flex-direction: column; gap: 0.35rem; }
+.fb-label {
+  font-size: 0.85rem; font-weight: 600; color: var(--text-main);
+  margin-top: 0.5rem;
+}
+.fb-radio-group {
+  display: flex; flex-direction: column; gap: 0.45rem; margin: 0.35rem 0 0.75rem;
+}
+.fb-radio {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: var(--bg-main); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.7rem 0.9rem; cursor: pointer;
+  transition: border-color 0.2s;
+}
+.fb-radio:has(input:checked) {
+  border-color: var(--accent);
+  background: rgba(59, 130, 246, 0.1);
+}
+.fb-radio input { width: auto; margin: 0; accent-color: var(--accent); }
+.fb-submit {
+  width: 100%; margin-top: 0.5rem;
+  background: linear-gradient(135deg, #25D366, #128C7E) !important;
+  font-size: 1rem; padding: 0.85rem;
+}
+
+.toast {
+  position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--bg-card); color: var(--text-main);
+  border: 1px solid var(--border-strong); border-radius: 12px;
+  padding: 0.75rem 1.25rem; font-size: 0.9rem; font-weight: 500;
+  box-shadow: var(--shadow); opacity: 0; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s; z-index: 1100;
+  max-width: 90vw; text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Share button on game pages */
+.share-trigger, #share-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--bg-card); color: var(--text-main);
+  border: 1px solid var(--border-strong); border-radius: 10px;
+  padding: 0.45rem 0.9rem; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; font-family: 'Space Grotesk', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+}
+.share-trigger:hover, #share-btn:hover {
+  border-color: var(--accent); background: var(--bg-card-hover);
+}
+
+.game-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.game-nav > a { order: 0; }
+.game-nav .game-brand { order: 2; margin-inline-start: auto; }
+.game-nav .share-trigger { order: 1; }

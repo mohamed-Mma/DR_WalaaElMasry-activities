@@ -214,9 +214,50 @@
           <span class="link-url">wa.me/201157566942</span>
         </a>
       </div>
+      <div class="link-group" style="margin-top:1.75rem;">
+        <h3>Activities</h3>
+        <div id="activity-links"></div>
+      </div>
     </div>
   </section>
 
   <script src="js/main.js"></script>
+  <script src="js/share.js"></script>
+  <script>
+    (function () {
+      const base = location.href.replace(/index\.html.*$/, '').replace(/\/?$/, '/');
+      const acts = [
+        { name: 'Network Defender', path: 'games/network-defender.html' },
+        { name: 'MFA Lab', path: 'games/mfa.html' },
+        { name: 'Public Key Lab', path: 'games/public-key.html' },
+        { name: 'Digital Signature Lab', path: 'games/digital-signature.html' },
+        { name: 'Incident Commander', path: 'games/incident-commander.html' },
+        { name: 'Trace the Request', path: 'games/trace-the-request.html' },
+        { name: 'Web App Architect', path: 'games/web-app-architect.html' },
+        { name: 'Web Chat Simulator', path: 'games/web-chat-simulator.html' }
+      ];
+      const box = document.getElementById('activity-links');
+      if (!box) return;
+      acts.forEach(a => {
+        const url = base + a.path;
+        const row = document.createElement('div');
+        row.className = 'link-item';
+        row.style.cursor = 'default';
+        row.innerHTML = '<span>' + a.name + '</span>' +
+          '<span style="display:flex;gap:0.4rem;align-items:center;">' +
+          '<span class="link-url" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + a.path + '</span>' +
+          '<button type="button" class="view-btn solid" style="padding:0.3rem 0.55rem;font-size:0.75rem;" data-copy="' + url + '">COPY</button>' +
+          '<a class="view-btn" style="padding:0.3rem 0.55rem;font-size:0.75rem;" href="' + a.path + '">OPEN</a></span>';
+        box.appendChild(row);
+      });
+      box.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-copy]');
+        if (!btn) return;
+        navigator.clipboard && navigator.clipboard.writeText(btn.dataset.copy).catch(function(){});
+        btn.textContent = '✓';
+        setTimeout(function(){ btn.textContent = 'COPY'; }, 1500);
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Chat Simulator | Dr. Walaa El-Masry</title>
+  <link rel="icon" type="image/webp" href="../assets/images/logo.webp">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <div class="game-wrap">
+    <div class="game-nav">
+      <a href="../index.html">← All activities</a>
+      <div class="game-brand"><span>Web Chat Simulator</span><img src="../assets/images/logo.webp" alt=""></div>
+      <button type="button" class="share-trigger" id="share-btn" data-share>↗ SHARE</button>
+    </div>
+    <h1 class="game-title">Fix the Connection!</h1>
+    <p class="game-desc">Build an HTTP request and inspect the JSON response.</p>
+    <div class="lab-box">
+      <h3>① Method</h3>
+      <select id="method">
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+      <h3 style="margin-top:0.9rem;">② Endpoint</h3>
+      <input type="text" id="endpoint" value="/api/lessons" placeholder="/api/...">
+      <h3 style="margin-top:0.9rem;">③ Headers</h3>
+      <input type="text" id="headers" value="Content-Type: application/json">
+      <button class="btn" style="margin-top:0.9rem;" onclick="sendRequest()">Send Request</button>
+    </div>
+    <div class="lab-box">
+      <h3>Response</h3>
+      <pre id="response" style="background:var(--bg-main);padding:1rem;border-radius:10px;overflow:auto;min-height:120px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent-violet);margin:0;"></pre>
+    </div>
+  </div>
+  <script>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    function sendRequest() {
+      const method = document.getElementById('method').value;
+      const endpoint = document.getElementById('endpoint').value;
+      const resEl = document.getElementById('response');
+      if (!endpoint.startsWith('/')) {
+        resEl.textContent = 'Error: Endpoint must start with /';
+        return;
+      }
+      const fake = {
+        'GET /api/lessons': { status: 200, body: { success: true, data: [{ id: 1, title: 'Introduction to AI', chapter: 1 }, { id: 2, title: 'Network Security', chapter: 2 }] } },
+        'POST /api/lessons': { status: 201, body: { success: true, message: 'Lesson created', id: 3 } }
+      };
+      const key = method + ' ' + endpoint;
+      const resp = fake[key] || { status: 404, body: { success: false, error: 'Endpoint not found in this simulator' } };
+      const statusText = resp.status === 200 ? 'OK' : resp.status === 201 ? 'Created' : 'Not Found';
+      resEl.textContent = `HTTP/1.1 ${resp.status} ${statusText}\nContent-Type: application/json\n\n` + JSON.stringify(resp.body, null, 2);
+    }
+  </script>
+  <script src="../js/share.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Activities | Dr. Walaa El-Masry — Programming & AI</title>
+  <meta name="description" content="Interactive programming activities for Year 2 Baccalaureate. Learn by trying — Dr. Walaa El-Masry.">
+  <meta name="theme-color" content="#0B0D12">
+  <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme" title="Light / Dark">
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <!-- Intro -->
+  <section id="intro-screen" class="screen active">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+    <div class="logo-container">
+      <div class="logo-ring"></div>
+      <img src="assets/images/logo.webp" alt="Programming & AI — Dr. Walaa El-Masry">
+    </div>
+    <p class="eyebrow">DR. WALAA EL-MASRY • PROGRAMMING & AI</p>
+    <h1 class="main-title">INTERACTIVE<br>ACTIVITIES</h1>
+    <p class="subtitle">Make it click by trying it yourself. Year 2 Baccalaureate Programming.</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-num">8</span><span class="stat-label">Activities</span></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label">Chapters</span></div>
+      <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Practice</span></div>
+    </div>
+    <button id="start-btn" class="start-btn" type="button">
+      <span>START</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </section>
+
+  <!-- Activities -->
+  <section id="activities-screen" class="screen">
+    <header class="header">
+      <div class="header-left">
+        <img src="assets/images/logo.webp" alt="" class="header-logo">
+        <h2>ACTIVITIES LAB</h2>
+      </div>
+      <div class="header-right">
+        <button class="back-btn" id="open-links" type="button">🔗 LINKS</button>
+        <span class="chapters-count">8 ACTIVITIES</span>
+      </div>
+    </header>
+
+    <div class="section-head">
+      <button class="back-btn" id="back-to-welcome" type="button">← BACK TO WELCOME</button>
+      <p class="header-subtitle">Choose a topic, try it out, and improve with every attempt.</p>
+    </div>
+
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search-input" type="search" placeholder="Search activities or topics..." autocomplete="off">
+    </div>
+
+    <div class="chips" id="filters">
+      <button class="chip on" data-f="all" type="button">ALL</button>
+      <button class="chip" data-f="network" type="button">Network Security</button>
+      <button class="chip" data-f="crypto" type="button">Cryptography</button>
+      <button class="chip" data-f="incident" type="button">Incident Response</button>
+      <button class="chip" data-f="web" type="button">Web Applications</button>
+    </div>
+
+    <div class="activities-grid" id="activities-grid">
+      <!-- cards injected by JS or static -->
+      <article class="activity-card" data-cat="network" data-title="Network Defender">
+        <div class="card-top">
+          <span class="card-badge">Chapter 2</span>
+          <span class="card-tag">Network Security Design</span>
+        </div>
+        <h3>Network Defender</h3>
+        <p>Secure headquarters, the branch, and remote staff. Choose the right layers of protection.</p>
+        <div class="card-topics"><span>Firewall</span><span>DMZ</span><span>VPN</span></div>
+        <a href="games/network-defender.html" class="card-btn">Start activity →</a>
+      </article>
+
+      <article class="activity-card" data-cat="crypto" data-title="MFA Lab">
+        <div class="card-top">
+          <span class="card-badge">Chapter 2</span>
+          <span class="card-tag">Authentication</span>
+        </div>
+        <h3>MFA Lab</h3>
+        <p>Is a password enough? Try signing in with a password and an OTP code.</p>
+        <div class="card-topics"><span>Password</span><span>OTP</span><span>MFA</span></div>
+        <a href="games/mfa.html" class="card-btn">Start activity →</a>
+      </article>
+
+      <article class="activity-card" data-cat="crypto" data-title="Public Key Lab">
+        <div class="card-top">
+          <span class="card-badge">Chapter 2</span>
+          <span class="card-tag">Encryption</span>
+        </div>
+        <h3>Public Key Lab</h3>
+        <p>Encrypt a message with a public key. Discover the role of the private key.</p>
+        <div class="card-topics"><span>Public Key</span><span>Private Key</span></div>
+        <a href="games/public-key.html" class="card-btn">Start activity →</a>
+      </article>
+
+      <article class="activity-card" data-cat="crypto" data-title="Digital Signature Lab">
+        <div class="card-top">
+          <span class="card-badge">Chapter 2</span>
+          <span class="card-tag">Integrity</span>
+        </div>
+        <h3>Digital Signature Lab</h3>
+        <p>Create a digital signature, change the data, and see verification fail.</p>
+        <div class="card-topics"><span>Sign</span><span>Verify</span><span>Integrity</span></div>
+        <a href="games/digital-signature.html" class="card-btn">Start activity →</a>
+      </article>
+
+      <article class="activity-card" data-cat="incident" data-title="Incident Commander">
+        <div class="card-top">
+          <span class="card-badge">Chapter 2</span>
+          <span class="card-tag">Incident Response</span>
+        </div>
+        <h3>Incident Commander</h3>
+        <p>Assess risks, contain malware, and restore the platform safely.</p>
+        <div class="card-topics"><span>Identify</span><span>Contain</span><span>Recover</span></div>
+        <a href="games/incident-commander.html" class="card-btn">Start activity →</a>
+      </article>
+
+      <article class="activity-card" data-cat="web" data-title="Trace the Request">
+        <div class="card-top">
+          <span class="card-badge">Chapter 3</span>
+          <span class="card-tag">Web Architecture</span>
+        </div>
+        <h3>Trace the Request</h3>
+        <p>Follow the data behind every click through Frontend, Backend, and Database.</p>
+        <div class="card-topics"><span>Frontend</span><span>Backend</span><span>Database</span></div>
+        <a href="games/trace-the-request.html" class="card-btn">Start activity →</a>
+      </article>
+
+      <article class="activity-card" data-cat="web" data-title="Web App Architect">
+        <div class="card-top">
+          <span class="card-badge">Chapter 3</span>
+          <span class="card-tag">Web Architecture</span>
+        </div>
+        <h3>Web App Architect</h3>
+        <p>Build Frontend, Backend, and Database layers. Test and fix the design.</p>
+        <div class="card-topics"><span>Build</span><span>Simulate</span><span>Debug</span></div>
+        <a href="games/web-app-architect.html" class="card-btn">Start activity →</a>
+      </article>
+
+      <article class="activity-card" data-cat="web" data-title="Web Chat Simulator">
+        <div class="card-top">
+          <span class="card-badge">Chapter 3</span>
+          <span class="card-tag">HTTP / HTTPS</span>
+        </div>
+        <h3>Web Chat Simulator</h3>
+        <p>Build HTTP requests, inspect JSON responses, and restore the full flow.</p>
+        <div class="card-topics"><span>HTTP</span><span>API</span><span>JSON</span></div>
+        <a href="games/web-chat-simulator.html" class="card-btn">Start activity →</a>
+      </article>
+    </div>
+
+    <footer class="footer">
+      <p>Dr. Walaa El-Masry • Programming & AI</p>
+      <p class="footer-links">
+        <a href="https://linktr.ee/DR_WalaaElMasry" target="_blank" rel="noopener">Linktree</a>
+        <span aria-hidden="true">|</span>
+        <a href="tel:01157566942">01157566942</a>
+        <span aria-hidden="true">|</span>
+        <a href="https://wa.me/201157566942" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </footer>
+  </section>
+
+  <!-- Links Screen -->
+  <section id="links-screen" class="screen">
+    <div class="certs-header">
+      <button class="back-btn" id="links-back" type="button">← BACK TO ACTIVITIES</button>
+    </div>
+    <div class="certs-titles">
+      <h2 class="certs-title">ALL LINKS</h2>
+      <p class="certs-subtitle">Contact and resources — Dr. Walaa El-Masry</p>
+    </div>
+    <div class="links-wrap" id="links-list">
+      <div class="link-group">
+        <h3>Contact</h3>
+        <a class="link-item" href="https://linktr.ee/DR_WalaaElMasry" target="_blank" rel="noopener">
+          <span>Linktree</span>
+          <span class="link-url">linktr.ee/DR_WalaaElMasry</span>
+        </a>
+        <a class="link-item" href="tel:01157566942">
+          <span>Phone</span>
+          <span class="link-url">01157566942</span>
+        </a>
+        <a class="link-item" href="https://wa.me/201157566942" target="_blank" rel="noopener">
+          <span>WhatsApp</span>
+          <span class="link-url">wa.me/201157566942</span>
+        </a>
+      </div>
+      <div class="link-group" style="margin-top:1.75rem;">
+        <h3>Activities</h3>
+        <div id="activity-links"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+  <script src="js/share.js"></script>
+  <script>
+    (function () {
+      const base = location.href.replace(/index\.html.*$/, '').replace(/\/?$/, '/');
+      const acts = [
+        { name: 'Network Defender', path: 'games/network-defender.html' },
+        { name: 'MFA Lab', path: 'games/mfa.html' },
+        { name: 'Public Key Lab', path: 'games/public-key.html' },
+        { name: 'Digital Signature Lab', path: 'games/digital-signature.html' },
+        { name: 'Incident Commander', path: 'games/incident-commander.html' },
+        { name: 'Trace the Request', path: 'games/trace-the-request.html' },
+        { name: 'Web App Architect', path: 'games/web-app-architect.html' },
+        { name: 'Web Chat Simulator', path: 'games/web-chat-simulator.html' }
+      ];
+      const box = document.getElementById('activity-links');
+      if (!box) return;
+      acts.forEach(a => {
+        const url = base + a.path;
+        const row = document.createElement('div');
+        row.className = 'link-item';
+        row.style.cursor = 'default';
+        row.innerHTML = '<span>' + a.name + '</span>' +
+          '<span style="display:flex;gap:0.4rem;align-items:center;">' +
+          '<span class="link-url" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + a.path + '</span>' +
+          '<button type="button" class="view-btn solid" style="padding:0.3rem 0.55rem;font-size:0.75rem;" data-copy="' + url + '">COPY</button>' +
+          '<a class="view-btn" style="padding:0.3rem 0.55rem;font-size:0.75rem;" href="' + a.path + '">OPEN</a></span>';
+        box.appendChild(row);
+      });
+      box.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-copy]');
+        if (!btn) return;
+        navigator.clipboard && navigator.clipboard.writeText(btn.dataset.copy).catch(function(){});
+        btn.textContent = '✓';
+        setTimeout(function(){ btn.textContent = 'COPY'; }, 1500);
+      });
+    })();
+  </script>
+</body>
+</html>

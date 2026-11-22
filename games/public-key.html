@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Key Lab | Dr. Walaa El-Masry</title>
+  <link rel="icon" type="image/webp" href="../assets/images/logo.webp">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="game-wrap">
+    <div class="game-nav">
+      <a href="../index.html">← All activities</a>
+      <div class="game-brand"><span>Public Key Lab</span><img src="../assets/images/logo.webp" alt=""></div>
+      <button type="button" class="share-trigger" id="share-btn" data-share>↗ SHARE</button>
+    </div>
+
+    <h1 class="game-title">Encrypt a message with a public key</h1>
+    <p class="game-desc">Write a message, encrypt it, then try decrypting with the right and wrong keys.</p>
+
+    <div class="lab-box">
+      <h3>Demo keys</h3>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:0.4rem;"><strong>Public Key:</strong> <code style="font-family:'JetBrains Mono',monospace;background:var(--bg-main);padding:2px 8px;border-radius:4px;">PUB-WALAA-2026</code></p>
+      <p style="color:var(--text-secondary);font-size:0.9rem;"><strong>Private Key:</strong> <code style="font-family:'JetBrains Mono',monospace;background:var(--bg-main);padding:2px 8px;border-radius:4px;">PRIV-WALAA-SECRET</code></p>
+    </div>
+
+    <div class="lab-box">
+      <h3>① Plaintext</h3>
+      <textarea id="plain" rows="3" placeholder="e.g. Hello Dr. Walaa"></textarea>
+      <button class="btn" onclick="encryptMsg()">Encrypt with Public Key</button>
+    </div>
+
+    <div class="lab-box">
+      <h3>② Ciphertext</h3>
+      <div id="cipher" style="background:var(--bg-main);padding:1rem;border-radius:10px;font-family:'JetBrains Mono',monospace;word-break:break-all;min-height:56px;color:var(--accent-violet);font-size:0.85rem;"></div>
+    </div>
+
+    <div class="lab-box">
+      <h3>③ Decrypt</h3>
+      <input type="text" id="tryKey" placeholder="Enter the key to decrypt">
+      <button class="btn" onclick="decryptMsg()">Decrypt</button>
+      <div id="decryptResult"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+
+    let encrypted = '';
+    function simpleEncrypt(text, key) {
+      let result = '';
+      for (let i = 0; i < text.length; i++) {
+        result += String.fromCharCode(text.charCodeAt(i) + (key.charCodeAt(i % key.length) % 20) + 5);
+      }
+      return btoa(unescape(encodeURIComponent(result)));
+    }
+    function simpleDecrypt(cipher, key) {
+      try {
+        let text = decodeURIComponent(escape(atob(cipher)));
+        let result = '';
+        for (let i = 0; i < text.length; i++) {
+          result += String.fromCharCode(text.charCodeAt(i) - (key.charCodeAt(i % key.length) % 20) - 5);
+        }
+        return result;
+      } catch { return null; }
+    }
+    function encryptMsg() {
+      const plain = document.getElementById('plain').value;
+      if (!plain) { alert('Write a message first'); return; }
+      encrypted = simpleEncrypt(plain, 'PUB-WALAA-2026');
+      document.getElementById('cipher').textContent = encrypted;
+    }
+    function decryptMsg() {
+      const key = document.getElementById('tryKey').value;
+      const res = document.getElementById('decryptResult');
+      if (!encrypted) { res.innerHTML = '<div class="result error">Encrypt a message first</div>'; return; }
+      if (key === 'PRIV-WALAA-SECRET') {
+        const plain = simpleDecrypt(encrypted, 'PUB-WALAA-2026');
+        res.innerHTML = `<div class="result success"><strong>Decrypted successfully</strong><br><br>Original message: ${plain}<br><br>Only the private key can decrypt what was encrypted with the public key.</div>`;
+      } else if (key === 'PUB-WALAA-2026') {
+        res.innerHTML = '<div class="result error">The public key cannot decrypt. You need the private key.</div>';
+      } else {
+        res.innerHTML = '<div class="result error">Wrong key. Try PRIV-WALAA-SECRET</div>';
+      }
+    }
+  </script>
+  <script src="../js/share.js"></script>
+</body>
+</html>

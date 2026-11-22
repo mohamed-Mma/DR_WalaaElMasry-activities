@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Defender | Dr. Walaa El-Masry</title>
+  <link rel="icon" type="image/webp" href="../assets/images/logo.webp">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <div class="game-wrap">
+    <div class="game-nav">
+      <a href="../index.html">← All activities</a>
+      <div class="game-brand"><span>Network Defender</span><img src="../assets/images/logo.webp" alt=""></div>
+      <button type="button" class="share-trigger" id="share-btn" data-share>↗ SHARE</button>
+    </div>
+    <h1 class="game-title">Secure the company network</h1>
+    <p class="game-desc">Choose the right layers of protection for HQ, branch, and remote staff.</p>
+    <div class="lab-box">
+      <h3>Scenario</h3>
+      <p style="color:var(--text-secondary);font-size:0.95rem;">An education company has a main office, a branch, and remote employees. Design layered security (Defense in Depth).</p>
+    </div>
+    <div class="lab-box">
+      <h3>Select protection layers (pick the correct 3)</h3>
+      <div style="display:flex;flex-direction:column;gap:0.7rem;">
+        <label style="display:flex;align-items:center;gap:0.7rem;cursor:pointer;"><input type="checkbox" value="firewall" class="layer"> Firewall — blocks unauthorized traffic</label>
+        <label style="display:flex;align-items:center;gap:0.7rem;cursor:pointer;"><input type="checkbox" value="dmz" class="layer"> DMZ — isolated zone for public servers</label>
+        <label style="display:flex;align-items:center;gap:0.7rem;cursor:pointer;"><input type="checkbox" value="vpn" class="layer"> VPN — secure tunnel for remote staff</label>
+        <label style="display:flex;align-items:center;gap:0.7rem;cursor:pointer;"><input type="checkbox" value="antivirus" class="layer"> Antivirus only on endpoints</label>
+        <label style="display:flex;align-items:center;gap:0.7rem;cursor:pointer;"><input type="checkbox" value="openwifi" class="layer"> Open Wi-Fi with no password</label>
+      </div>
+      <button class="btn" style="margin-top:1.1rem;" onclick="checkLayers()">Check security design</button>
+      <div id="result"></div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    function checkLayers() {
+      const checked = Array.from(document.querySelectorAll('.layer:checked')).map(c => c.value);
+      const res = document.getElementById('result');
+      const good = ['firewall', 'dmz', 'vpn'];
+      let score = 0;
+      good.forEach(g => { if (checked.includes(g)) score++; });
+      if (checked.includes('openwifi')) score = 0;
+      if (score === 3 && !checked.includes('openwifi')) {
+        res.innerHTML = '<div class="result success"><strong>Excellent design</strong><br>Firewall + DMZ + VPN = layered protection (Defense in Depth).</div>';
+      } else if (checked.includes('openwifi')) {
+        res.innerHTML = '<div class="result error">Open Wi-Fi is a serious risk. Remove it and try again.</div>';
+      } else {
+        res.innerHTML = `<div class="result info">You selected ${score}/3 correct layers. Aim for: Firewall + DMZ + VPN.</div>`;
+      }
+    }
+  </script>
+  <script src="../js/share.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 150" width="560" height="150" role="img" aria-label="This project is not open source">
+<style>.f{font-family:'Arial Black','Archivo Black',Impact,'Helvetica Neue',Arial,sans-serif;font-weight:900}@keyframes shake{0%,100%{transform:rotate(-3deg)}20%{transform:rotate(2deg) translateX(4px)}40%{transform:rotate(-4deg)}60%{transform:rotate(3deg) translateX(-4px)}80%{transform:rotate(-2deg)}}
+@keyframes fl{0%,70%{fill:#FF3D81}71%,100%{fill:#FFE600}}
+.sk{transform-box:fill-box;transform-origin:center;animation:shake 1.4s ease-in-out infinite}.fl{animation:fl 1.4s steps(1) infinite}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<g class="sk"><rect x="30" y="30" width="500" height="100" fill="#000"/><rect class="fl" x="18" y="18" width="500" height="100" stroke="#000" stroke-width="6"/>
+<text class="f" x="268" y="62" font-size="30" text-anchor="middle" fill="#000">⛔ THIS PROJECT IS</text>
+<text class="f" x="268" y="104" font-size="40" text-anchor="middle" fill="#000" textLength="440" lengthAdjust="spacingAndGlyphs">NOT OPEN SOURCE</text></g></svg>

@@ -1,69 +1,111 @@
-<div align="center">
+Markdown<p align="center">
+  <img src="assets/images/logo.webp" width="100" alt="Dr. Walaa El-Masry"/>
+</p>
 
-<img src="assets/images/logo.webp" width="120" alt="Dr. Walaa El-Masry — Programming & AI"/>
+<h1 align="center">⚡ INTERACTIVE ACTIVITIES</h1>
 
-# Interactive Activities
-### Programming & AI · Year 2 Baccalaureate
+<p align="center"><b>PROGRAMMING &amp; AI · YEAR 2 BACCALAUREATE</b></p>
 
-**Owned by Dr. Walaa El-Masry**  
-Developed by [@mohamed-Mma](https://github.com/mohamed-Mma)
+<p align="center">
+  <img src="https://img.shields.io/badge/STATUS-PRIVATE-black?style=for-the-badge&labelColor=000000&color=FF2D2D" alt="Private"/>
+  <img src="https://img.shields.io/badge/LICENSE-ALL%20RIGHTS%20RESERVED-black?style=for-the-badge&labelColor=000000&color=FFD600" alt="License"/>
+  <img src="https://img.shields.io/badge/PERMISSION-REQUIRED-black?style=for-the-badge&labelColor=000000&color=00E5A8" alt="Permission"/>
+</p>
 
 <br/>
 
-![Status](https://img.shields.io/badge/Status-Private-red?style=for-the-badge)
-![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-important?style=for-the-badge)
-![Permission](https://img.shields.io/badge/Permission-Required-orange?style=for-the-badge)
+<table>
+<tr>
+<td width="50%">
 
-</div>
+### 👑 OWNER
+**Dr. Walaa El-Masry**
 
----
+</td>
+<td width="50%">
 
-## ⚠️ Restricted Project
+### 🛠 DEVELOPER
+**[@mohamed-Mma](https://github.com/mohamed-Mma)**
 
-> This repository is **private intellectual property**.  
-> It is **not open source** and **not free to use**.
-
-| | |
-|---|---|
-| **Owner** | Dr. Walaa El-Masry |
-| **Developer** | [@mohamed-Mma](https://github.com/mohamed-Mma) |
-| **License** | All Rights Reserved |
-| **Public use** | ❌ Not allowed without permission |
+</td>
+</tr>
+</table>
 
 ---
 
-## 🚫 What is NOT allowed
+## 🚫 THIS PROJECT IS LOCKED
+┌──────────────────────────────────────────────┐
 
-Without **written permission** from the developer, you may **not**:
+│  NOT OPEN SOURCE                             │
 
-- ❌ Copy, clone, or fork this project  
-- ❌ Reuse code, design, or activities  
-- ❌ Modify and republish under another name  
-- ❌ Use it for teaching, courses, or commercial work  
-- ❌ Remove ownership or credit notices  
+│  NOT FREE TO USE                             │
 
-**Unauthorized use is strictly prohibited.**
+│  NOT FREE TO COPY                            │
+
+│                                              │
+
+│  ALL RIGHTS RESERVED                         │
+
+│  © DR. WALAA EL-MASRY                        │
+
+└──────────────────────────────────────────────┘Text
+> **Unauthorized use is strictly prohibited.**  
+> Access ≠ Permission.
 
 ---
 
-## 🔐 Permission Required
+## ❌ FORBIDDEN WITHOUT PERMISSION
 
-Any use of this project requires prior approval from the developer:
+| Action | Status |
+|:-------|:------:|
+| Copy / Clone / Fork | ❌ NO |
+| Reuse code or design | ❌ NO |
+| Republish under another name | ❌ NO |
+| Teaching / Courses / Commercial use | ❌ NO |
+| Remove credits or ownership | ❌ NO |
+
+---
+
+## 🔐 WANT TO USE IT?
+
+You need **written permission** from the developer first:
 
 ### 👉 [@mohamed-Mma](https://github.com/mohamed-Mma)
 
-Access to the source code does **not** mean you have permission to use it.
+No permission = no rights.
 
 ---
 
-## 📜 License
-
-```text
+## 📜 LICENSE
 Copyright © Dr. Walaa El-Masry
-All Rights Reserved.
 
-No license is granted to the public to use, copy, modify,
-merge, publish, distribute, sublicense, or sell any part
-of this software or its content.
+All Rights Reserved.No public license is granted.
 
-All rights remain with the owner.
+You may not use, copy, modify, merge, publish,
+
+distribute, sublicense, or sell any part of this
+
+project without explicit written approval.All rights remain with the owner.Text
+---
+
+## 📇 CREDITS
+
+| Role | Name |
+|:-----|:-----|
+| **Owner** | Dr. Walaa El-Masry |
+| **Developer** | [@mohamed-Mma](https://github.com/mohamed-Mma) |
+
+---
+
+## 📞 CONTACT
+
+- Developer → [@mohamed-Mma](https://github.com/mohamed-Mma)
+- Owner → Dr. Walaa El-Masry
+
+---
+
+<p align="center">
+  <b>© DR. WALAA EL-MASRY — PROGRAMMING &amp; AI</b><br/>
+  Built by <a href="https://github.com/mohamed-Mma"><b>@mohamed-Mma</b></a><br/>
+  <code>ALL RIGHTS RESERVED · NO PERMISSION · NO USE</code>
+</p>

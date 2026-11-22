@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incident Commander | Dr. Walaa El-Masry</title>
+  <link rel="icon" type="image/webp" href="../assets/images/logo.webp">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <div class="game-wrap">
+    <div class="game-nav">
+      <a href="../index.html">← All activities</a>
+      <div class="game-brand"><span>Incident Commander</span><img src="../assets/images/logo.webp" alt=""></div>
+    </div>
+    <h1 class="game-title">Save the Platform!</h1>
+    <p class="game-desc">Malware hit the learning platform. Put the Incident Response steps in the correct order.</p>
+    <div class="lab-box">
+      <h3>Order the steps (1 → 4)</h3>
+      <p style="color:var(--text-secondary);margin-bottom:1rem;font-size:0.9rem;">Click steps in the correct sequence.</p>
+      <div id="steps">
+        <div class="step-item" data-id="contain" style="background:var(--bg-main);padding:0.85rem;border-radius:10px;margin-bottom:0.55rem;cursor:pointer;border:2px solid transparent;" onclick="selectStep(this)">Contain the threat — isolate infected systems</div>
+        <div class="step-item" data-id="identify" style="background:var(--bg-main);padding:0.85rem;border-radius:10px;margin-bottom:0.55rem;cursor:pointer;border:2px solid transparent;" onclick="selectStep(this)">Identify — detect and classify the incident</div>
+        <div class="step-item" data-id="recover" style="background:var(--bg-main);padding:0.85rem;border-radius:10px;margin-bottom:0.55rem;cursor:pointer;border:2px solid transparent;" onclick="selectStep(this)">Recover — restore service safely</div>
+        <div class="step-item" data-id="eradicate" style="background:var(--bg-main);padding:0.85rem;border-radius:10px;margin-bottom:0.55rem;cursor:pointer;border:2px solid transparent;" onclick="selectStep(this)">Eradicate — remove the root cause</div>
+      </div>
+      <p style="margin:1rem 0 0.5rem;color:var(--text-secondary);font-size:0.9rem;">Current order: <span id="orderDisplay">—</span></p>
+      <button class="btn" onclick="checkOrder()">Check order</button>
+      <button class="btn btn-secondary" onclick="resetOrder()" style="margin-inline-start:0.5rem;">Reset</button>
+      <div id="result"></div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    const correct = ['identify', 'contain', 'eradicate', 'recover'];
+    let selected = [];
+    function selectStep(el) {
+      if (selected.includes(el.dataset.id)) return;
+      selected.push(el.dataset.id);
+      el.style.borderColor = 'var(--accent)';
+      el.style.opacity = '0.7';
+      document.getElementById('orderDisplay').textContent = selected.join(' → ');
+    }
+    function resetOrder() {
+      selected = [];
+      document.querySelectorAll('.step-item').forEach(el => { el.style.borderColor = 'transparent'; el.style.opacity = '1'; });
+      document.getElementById('orderDisplay').textContent = '—';
+      document.getElementById('result').innerHTML = '';
+    }
+    function checkOrder() {
+      const res = document.getElementById('result');
+      if (selected.length !== 4) { res.innerHTML = '<div class="result info">Select all 4 steps in order</div>'; return; }
+      if (JSON.stringify(selected) === JSON.stringify(correct)) {
+        res.innerHTML = '<div class="result success"><strong>Correct order</strong><br>Identify → Contain → Eradicate → Recover<br>This is the standard Incident Response sequence.</div>';
+      } else {
+        res.innerHTML = '<div class="result error">Not correct. Right order: Identify → Contain → Eradicate → Recover</div>';
+      }
+    }
+  </script>
+</body>
+</html>

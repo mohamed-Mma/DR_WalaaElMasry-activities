@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trace the Request | Dr. Walaa El-Masry</title>
+  <link rel="icon" type="image/webp" href="../assets/images/logo.webp">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <div class="game-wrap">
+    <div class="game-nav">
+      <a href="../index.html">← All activities</a>
+      <div class="game-brand"><span>Trace the Request</span><img src="../assets/images/logo.webp" alt=""></div>
+    </div>
+    <h1 class="game-title">Follow the data behind every click</h1>
+    <p class="game-desc">Choose the correct path of a login request through Frontend, Backend, and Database.</p>
+    <div class="lab-box">
+      <h3>Scenario: Student logs into the learning platform</h3>
+      <p style="color:var(--text-secondary);margin-bottom:1rem;font-size:0.9rem;">Select the full request path.</p>
+      <div style="display:flex;flex-direction:column;gap:0.55rem;margin-bottom:1.1rem;">
+        <label><input type="radio" name="path" value="1"> Frontend → Database → Backend</label>
+        <label><input type="radio" name="path" value="2"> Backend → Frontend → Database</label>
+        <label><input type="radio" name="path" value="3"> Frontend → Backend → Database → Backend → Frontend</label>
+        <label><input type="radio" name="path" value="4"> Database → Frontend directly</label>
+      </div>
+      <button class="btn" onclick="checkPath()">Check path</button>
+      <div id="result"></div>
+    </div>
+    <div class="lab-box">
+      <h3>Quick map</h3>
+      <ul style="color:var(--text-secondary);padding-inline-start:1.2rem;line-height:1.8;font-size:0.95rem;">
+        <li><strong>Frontend</strong> — UI the user sees (HTML / CSS / JS)</li>
+        <li><strong>Backend</strong> — server that handles logic and APIs</li>
+        <li><strong>Database</strong> — where data is stored</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    function checkPath() {
+      const selected = document.querySelector('input[name="path"]:checked');
+      const res = document.getElementById('result');
+      if (!selected) { res.innerHTML = '<div class="result info">Select a path first</div>'; return; }
+      if (selected.value === '3') {
+        res.innerHTML = '<div class="result success"><strong>Correct</strong><br>Request goes Frontend → Backend → Database, then the response travels back Backend → Frontend to the user.</div>';
+      } else {
+        res.innerHTML = '<div class="result error">Not correct. The full path returns to the Frontend at the end.</div>';
+      }
+    }
+  </script>
+</body>
+</html>

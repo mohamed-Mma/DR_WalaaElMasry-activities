@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MFA Lab | Dr. Walaa El-Masry</title>
+  <link rel="icon" type="image/webp" href="../assets/images/logo.webp">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <div class="game-wrap">
+    <div class="game-nav">
+      <a href="../index.html">← All activities</a>
+      <div class="game-brand">
+        <span>MFA Lab</span>
+        <img src="../assets/images/logo.webp" alt="Dr. Walaa El-Masry">
+      </div>
+    </div>
+
+    <h1 class="game-title">Is a password enough?</h1>
+    <p class="game-desc">Try signing in with a password and an OTP. See why Multi-Factor Authentication matters.</p>
+
+    <div class="lab-box">
+      <h3>① Demo OTP (Something you have)</h3>
+      <p style="color:var(--text-secondary);margin-bottom:0.75rem;font-size:0.9rem;">Use this fixed code for the activity (not a real authenticator).</p>
+      <div style="background:var(--bg-main);padding:1rem;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:1.35rem;text-align:center;letter-spacing:6px;color:var(--accent-cyan);">482 916</div>
+    </div>
+
+    <div class="lab-box">
+      <h3>② Password (Something you know)</h3>
+      <p style="color:var(--text-secondary);margin-bottom:0.6rem;font-size:0.9rem;">Demo password: <code style="background:var(--bg-main);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;">MFA2026!</code></p>
+      <input type="password" id="passwordInput" placeholder="Enter password">
+      <button class="btn" onclick="checkPassword()">Check password</button>
+      <div id="passResult"></div>
+    </div>
+
+    <div class="lab-box" id="otpBox" style="display:none;">
+      <h3>③ OTP verification</h3>
+      <input type="text" id="otpInput" placeholder="Enter OTP (482916)" maxlength="7">
+      <button class="btn" onclick="checkOTP()">Verify OTP & Login</button>
+      <div id="otpResult"></div>
+    </div>
+
+    <div class="lab-box" id="finalBox" style="display:none;">
+      <h3>Result</h3>
+      <div id="finalResult"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+
+    function checkPassword() {
+      const val = document.getElementById('passwordInput').value;
+      const res = document.getElementById('passResult');
+      if (val === 'MFA2026!') {
+        res.innerHTML = '<div class="result success">Password correct. Continue with OTP for stronger security.</div>';
+        document.getElementById('otpBox').style.display = 'block';
+      } else {
+        res.innerHTML = '<div class="result error">Wrong password. Try MFA2026!</div>';
+      }
+    }
+
+    function checkOTP() {
+      const val = document.getElementById('otpInput').value.replace(/\s/g, '');
+      const res = document.getElementById('otpResult');
+      const finalBox = document.getElementById('finalBox');
+      const finalRes = document.getElementById('finalResult');
+      if (val === '482916') {
+        res.innerHTML = '<div class="result success">OTP correct!</div>';
+        finalBox.style.display = 'block';
+        finalRes.innerHTML = '<div class="result success"><strong>Logged in with MFA</strong><br><br>Even if someone knows the password, they still need the OTP. That is Multi-Factor Authentication: something you know + something you have.</div>';
+      } else {
+        res.innerHTML = '<div class="result error">Wrong OTP. Use 482916</div>';
+      }
+    }
+  </script>
+</body>
+</html>
